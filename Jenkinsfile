@@ -2,7 +2,7 @@ pipeline{
     agent any
     tools { maven "Maven" }
     stages{
-     /*stage ('Build'){
+     stage ('Build'){
             steps{
                 sh "mvn clean install"
             }
@@ -30,7 +30,7 @@ pipeline{
                     sh label: '', script: 'curl -u $username:$password --upload-file target/springboot-0.0.1-SNAPSHOT.war http://18.224.155.110:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-$BUILD_NUMBER.war'
                 }
         }
-        }*/
+        }
         stage('Deploy to Development'){
             steps{
              deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://18.224.251.223:8000/')], contextPath: null, onFailure: false, war: '**/*.war'
@@ -38,7 +38,7 @@ pipeline{
         }
         stage('Deploy to Ansible Master'){
             steps{
-                sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-app-demo/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects'
+                sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects'
                 
             }
         }
