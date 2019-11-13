@@ -65,8 +65,8 @@ span.psw {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 50%; /* Full width */
+  height: 50%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -143,8 +143,8 @@ span.psw {
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="name" required>
 
-      <label for="psw"><b>Email</b></label>
-      <input type="text" placeholder="Enter Password" name="password" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
         
       <button type="submit">Login</button>
       <label>
