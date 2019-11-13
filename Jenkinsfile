@@ -1,61 +1,119 @@
-pipeline{
-    agent any
-    tools { maven "Maven" }
-    stages{
-     stage ('Build'){
-            steps{
-                sh "mvn clean install"
+pipeline {
+libraries{
+lib 'shlib'
+lib 'shlib@sonar.groovy'
+lib 'shlib@build.groovy'
+lib 'shlib@nexus.groovy'
+lib 'shlib@gate.groovy'
+lib 'shlib@devenvironment.groovy'
+lib 'shlib@deploy_dev.groovy'
+lib 'shlib@deploy_ansible.groovy'
+}
+
+ agent any
+   tools{
+        maven "Maven"
+    }
+    stages {
+      stage('Start')
+            {
+                steps
+                 { 
+                    sendNotifications 'STARTED'
+                 }
             }
-        }
-    stage('Sonarr') 
-       {environment {
+
+      stage('clean and build')
+            {
+                steps{
+                    
+                sendNotifications 'STARTEDBUILD'
+                build 'BUILD'
+                 
+            }
+            }
+            
+                
+                 
+             stage('SonarQube analysis') {
+             environment {
            scannerHome=tool 'sonarScanner'
        }
+
             steps {
-                withSonarQubeEnv('SonarQube') {
-                sh "mvn sonar:sonar"
+            sendNotifications 'SONAR ANALYSIS STARTED'
+                withSonarQubeEnv('SonarQube'){
+                     sh 'mvn sonar:sonar'
                 }
+            } 
             }
-        }
-        stage("Quality Gate") {
+        stage('Quality Gate') {
             steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-         }
+             gate 'GATE'
+            }
+       }
+  
+            stage("nexus") {
+            steps {
+          sendNotifications  'NEXUS STAGE STARTED'
+          nexus 'NEXUS'
         }
-        stage ('Nexusss'){
+        }
+         stage('Deploy to Development'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'Nexus_Credentials', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    sh label: '', script: 'curl -u $username:$password --upload-file target/springboot-0.0.1-SNAPSHOT.war http://18.224.155.110:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-$BUILD_NUMBER.war'
-                }
-        }
-        }
-        stage('Deploy to Development'){
-            steps{
-             deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://18.224.251.223:8000/')], contextPath: null, onFailure: false, war: '**/*.war'
+            devenvironment 'DEPLOY INTO DEV ENVIROINMENT'
+             deploy_development 'deploy_dev'
             }
         }
         stage('Deploy to Ansible Master'){
             steps{
-                sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects'
-                
-            }
+               sendNotifications 'Deploy to Ansible Master'
+               deploy_ansible  'deploy_ansible'
+            } 
         }
+        
+        stage('Approval1'){
+                steps{
+                approval 'APPROVAL'
+                }
+                }
+                
         stage('Deploy to Test Server'){
              steps{
-                 sh 'ssh -t -t -i /var/lib/jenkins/.ssh/id_rsa ansadmin@172.31.31.91 "ansible-playbook /opt/playbooks/playfile.yml"'
+                 sendNotifications 'Deploy to Test Server'
+                 deploy_test 'deploy_test'
              }
         }
+        
+        stage('Approval2'){
+                steps{
+                approval 'APPROVAL'
+                }
+                }
         stage('Deploy to Performance Server'){
              steps{
-                 sh 'ssh -t -t -i /var/lib/jenkins/.ssh/id_rsa ansadmin@172.31.31.91 "ansible-playbook /opt/playbooks/performance.yml"'
+             sendNotifications 'Deploy to Performance Server'
+                 deploy_performance 'deploy_per'
              }
         }
+        stage('Approval3'){
+                steps{
+                approval 'APPROVAL'
+                }
+                }
         stage('Deploy to Production Server'){
              steps{
-                 sh 'ssh -t -t -i /var/lib/jenkins/.ssh/id_rsa ansadmin@172.31.31.91 "ansible-playbook /opt/playbooks/production.yml"'
+             sendNotifications 'Deploy to Production Server'
+                 deploy_production  'deploy_prod'
              }
         }
-    }
+
+      
+        }
+        post{
+always{
+sendNotifications currentBuild.result
 }
+}
+
+    }
