@@ -7,7 +7,7 @@ pipeline{
                 sh "mvn clean install"
             }
         }
-    stage('Sonar') 
+    stage('Sonarr') 
        {environment {
            scannerHome=tool 'sonarScanner'
        }
