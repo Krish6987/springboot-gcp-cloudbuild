@@ -11,10 +11,10 @@ public class EmployeeDAO
      
     static
     {
-        list.getEmployeeList().add(new Employee(1, "Krishna", "Krish", "gandurisrinivas789@gmail.com"));
-        list.getEmployeeList().add(new Employee(2, "Sai", "Tej", "saitej123@gmail.com"));
-        list.getEmployeeList().add(new Employee(3, "Mani", "kanta", "manikanta123@gmail.com"));
-        list.getEmployeeList().add(new Employee(4, "Aman", "Roy", "aman123@gmail.com"));
+        list.getEmployeeList().add(new Employee(1, "gandurisrinivas789@gmail.com", "Krish", "Krishna"));
+        list.getEmployeeList().add(new Employee(2, "saitej123@gmail.com", "Tej", "Sai"));
+        list.getEmployeeList().add(new Employee(3, "manikanta123@gmail.com", "kanta", "Mani"));
+        list.getEmployeeList().add(new Employee(4, "aman123@gmail.com", "Roy", "Aman"));
     }
      
     public Employees getAllEmployees()
