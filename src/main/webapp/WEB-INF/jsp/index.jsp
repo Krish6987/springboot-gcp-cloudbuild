@@ -127,7 +127,7 @@ span.psw {
 </head>
 <body>
 <div align="center">
-<h2>Modal Login Form</h2>
+<h2 style="color: white">Modal Login Form</h2>
 <font color="red">${errorMessage}</font>
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 </div>
