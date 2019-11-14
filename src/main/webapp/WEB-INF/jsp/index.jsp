@@ -78,7 +78,7 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
+  width: 50%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -126,7 +126,7 @@ span.psw {
 </style>
 </head>
 <body>
-<div align="center">
+<div align="center" style="padding-top: 30%">
 <h2 style="color: white">Modal Login Form</h2>
 <font color="red">${errorMessage}</font>
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
