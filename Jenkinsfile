@@ -1,13 +1,7 @@
 pipeline {
 libraries{
 lib 'shlib'
-lib 'shlib@sonar.groovy'
-lib 'shlib@build.groovy'
-lib 'shlib@nexus.groovy'
-lib 'shlib@gate.groovy'
-lib 'shlib@devenvironment.groovy'
-lib 'shlib@deploy_dev.groovy'
-lib 'shlib@deploy_ansible.groovy'
+
 }
 
  agent any
@@ -86,7 +80,12 @@ lib 'shlib@deploy_ansible.groovy'
                  deploy_test 'deploy_test'
              }
         }
-        
+          stage('functional test')
+    {
+    steps
+    {
+    functional 'functional_test'
+    }
         stage('Approval2'){
                 steps{
                 approval1 'APPROVAL1'
