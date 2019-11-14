@@ -36,10 +36,6 @@ lib 'shlib@deploy_ansible.groovy'
                 
                  
              stage('SonarQube analysis') {
-             environment {
-           scannerHome=tool 'sonarScanner'
-       }
-
             steps {
             sendNotifications 'SONAR ANALYSIS STARTED'
                 sonar 'SONAR'
