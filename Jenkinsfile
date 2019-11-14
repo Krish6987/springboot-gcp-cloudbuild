@@ -52,6 +52,12 @@ lib 'shlib@deploy_ansible.groovy'
              gate 'GATE'
             }
        }
+       stage('security scan') {
+            steps {
+            sendNotifications 'security scan started'
+             scan 'SCAN'
+            }
+       }
   
             stage("nexus") {
             steps {
@@ -87,7 +93,7 @@ lib 'shlib@deploy_ansible.groovy'
         
         stage('Approval2'){
                 steps{
-                approval 'APPROVAL'
+                approval 'APPROVAL1'
                 }
                 }
         stage('Deploy to Performance Server'){
