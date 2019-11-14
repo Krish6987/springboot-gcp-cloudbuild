@@ -84,7 +84,7 @@ lib 'shlib'
     {
     steps
     {
-    functional 'functional_test'
+    functional()
     }
         stage('Approval2'){
                 steps{
