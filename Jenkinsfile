@@ -8,7 +8,7 @@ lib 'shlib'
         maven "Maven"
     }
     stages {
-      stage('Start')
+      /*stage('Start')
             {
                 steps
                  { 
@@ -117,7 +117,7 @@ lib 'shlib'
                     jira 'DEPLOYMENT TO TEST SERVER FAILED','TEST-9'
                 }
             }
-        }
+        }*/
           stage('functional test')
     {
     steps
