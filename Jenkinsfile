@@ -37,14 +37,9 @@ lib 'shlib@deploy_ansible.groovy'
                 
                  
              stage('SonarQube analysis') {
-             enviroinment{
-    scannerHome=tool 'sonarScanner'  
-  }
             steps {
             sendNotifications 'SONAR ANALYSIS STARTED'
-                 withSonarQubeEnv('SonarQube'){
-                     sh 'mvn sonar:sonar'
-                }
+                 sonar 'SONAR'
             } 
             }
         stage('Quality Gate') {
