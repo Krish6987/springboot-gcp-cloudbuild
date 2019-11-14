@@ -78,7 +78,7 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 60%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -140,14 +140,13 @@ span.psw {
     </div>
 
     <div class="container">
-        <h2>Enter Login Details:</h2>
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="name" required>
 
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" required>
         
-      <button class="btn btn-success" type="submit">Login</button>
+      <button type="submit">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
