@@ -31,14 +31,7 @@ lib 'shlib@deploy_ansible.groovy'
                 build 'BUILD'
                  
             }
-            post {
-            failure{
-            jira()
-            }}
-            }
-            
-                
-                 
+    
              stage('SonarQube analysis') {
              environment {
            scannerHome=tool 'sonarScanner'
