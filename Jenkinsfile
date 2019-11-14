@@ -31,6 +31,7 @@ lib 'shlib@deploy_ansible.groovy'
                 build 'BUILD'
                  
             }
+            }
     
              stage('SonarQube analysis') {
              environment {
