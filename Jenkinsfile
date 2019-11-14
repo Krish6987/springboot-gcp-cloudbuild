@@ -42,7 +42,7 @@ lib 'shlib@deploy_ansible.groovy'
 
             steps {
             sendNotifications 'SONAR ANALYSIS STARTED'
-                sonar()
+                sonar 'SONAR'
             } 
             }
         stage('Quality Gate') {
