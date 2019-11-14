@@ -123,11 +123,11 @@ lib 'shlib'
 
       
         }
+        }
         post{
 always{
 sendNotifications currentBuild.result
 }
 }
 
-    }
     }
