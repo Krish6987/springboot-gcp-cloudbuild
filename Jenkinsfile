@@ -42,9 +42,7 @@ lib 'shlib@deploy_ansible.groovy'
 
             steps {
             sendNotifications 'SONAR ANALYSIS STARTED'
-                withSonarQubeEnv('SonarQube'){
-                     sh 'mvn sonar:sonar'
-                }
+                sonar()
             } 
             }
         stage('Quality Gate') {
@@ -52,12 +50,12 @@ lib 'shlib@deploy_ansible.groovy'
              gate 'GATE'
             }
        }
-       /*stage('security scan') {
+       stage('security scan') {
             steps {
             sendNotifications 'security scan started'
              scan 'SCAN'
             }
-       }*/
+       }
   
             stage("nexus") {
             steps {
@@ -93,7 +91,7 @@ lib 'shlib@deploy_ansible.groovy'
         
         stage('Approval2'){
                 steps{
-                approval 'APPROVAL1'
+                approval1 'APPROVAL1'
                 }
                 }
         stage('Deploy to Performance Server'){
@@ -104,7 +102,7 @@ lib 'shlib@deploy_ansible.groovy'
         }
         stage('Approval3'){
                 steps{
-                approval 'APPROVAL'
+                approval2 'APPROVAL1'
                 }
                 }
         stage('Deploy to Production Server'){
