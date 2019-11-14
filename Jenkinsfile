@@ -91,6 +91,7 @@ lib 'shlib'
     {
     functional 'functional_test'
     }
+    }
         stage('Approval2'){
                 steps{
                 approval1 'APPROVAL1'
@@ -122,7 +123,6 @@ lib 'shlib'
         }
 
       
-        }
         }
         post{
 always{
