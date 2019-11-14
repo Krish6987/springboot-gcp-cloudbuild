@@ -25,11 +25,11 @@ lib 'shlib'
                 build 'BUILD'
                  
             }
-            post{
+            /*post{
             failure{
             jira()
             }
-            }
+            }*/
             }
     
              stage('SonarQube analysis') {
