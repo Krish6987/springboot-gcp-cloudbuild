@@ -27,7 +27,7 @@ lib 'shlib'
             }
             post{
                 failure{
-                    Jira 'BUILD FAILED', 'TEST-1'
+                    Jira 'BUILD FAILED','TEST-1'
                 }
             }
             }
