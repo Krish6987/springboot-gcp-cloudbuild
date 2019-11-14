@@ -24,6 +24,7 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
+  border-radius: 5%;
 }
 
 button:hover {
@@ -127,7 +128,7 @@ span.psw {
 </head>
 <body>
 <div align="center" style="padding-top: 30%">
-<h2 style="color: white">Modal Login Form</h2>
+<h2 style="color: white">Please Login..!!</h2>
 <font color="red">${errorMessage}</font>
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 </div>
