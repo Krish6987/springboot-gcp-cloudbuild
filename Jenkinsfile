@@ -25,6 +25,11 @@ lib 'shlib'
                 build 'BUILD'
                  
             }
+            post{
+            failure{
+            jira()
+            }
+            }
             }
     
              stage('SonarQube analysis') {
@@ -42,14 +47,14 @@ lib 'shlib'
              gate 'GATE'
             }
        }
-       /*stage('security scan') {
+       /*stage('Security scan') {
             steps {
             sendNotifications 'security scan started'
              scan 'SCAN'
             }
        }*/
   
-            stage("nexus") {
+            stage("Nexus") {
             steps {
           sendNotifications  'NEXUS STAGE STARTED'
           nexus 'NEXUS'
@@ -84,7 +89,7 @@ lib 'shlib'
     {
     steps
     {
-    functional()
+    functional 'functional_test'
     }
         stage('Approval2'){
                 steps{
