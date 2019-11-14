@@ -20,7 +20,6 @@ lib 'shlib'
       stage('clean and build')
             {
                 steps{
-                    
                 sendNotifications 'STARTEDBUILD'
                 build 'BUILD'
                  
