@@ -52,12 +52,12 @@ lib 'shlib@deploy_ansible.groovy'
              gate 'GATE'
             }
        }
-       stage('security scan') {
+       /*stage('security scan') {
             steps {
             sendNotifications 'security scan started'
              scan 'SCAN'
             }
-       }
+       }*/
   
             stage("nexus") {
             steps {
