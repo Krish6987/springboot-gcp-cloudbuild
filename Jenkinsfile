@@ -70,9 +70,7 @@ lib 'shlib'
             stage("Nexus") {
             steps {
           sendNotifications  'NEXUS STAGE STARTED'
-          withCredentials([usernamePassword(credentialsId: 'nexus_creds', passwordVariable: 'password', usernameVariable:'username')]) {
-              sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-master-$BUILD_NUMBER.war'
-         }
+          nexus 'NEXUS'
         }
         post{
                 failure{
@@ -95,7 +93,7 @@ lib 'shlib'
         stage('Deploy to Ansible Master'){
             steps{
                sendNotifications 'Deploy to Ansible Master'
-               sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/master'
+               deploy_ansible 'deploy_ansible'
             } 
             post{
                 failure{
@@ -104,11 +102,12 @@ lib 'shlib'
             }
         }
         
-        /*stage('Approval1'){
+        stage('Approval1'){
+        when { branch "developer" }
                 steps{
                 approval 'APPROVAL'
                 }
-                }*/
+                }
                 
         stage('Deploy to Test Server'){
         when { branch "developer" }
@@ -122,8 +121,9 @@ lib 'shlib'
                 }
             }
         }
-          /*stage('functional test')
+          stage('functional test')
     {
+    when{ branch "developer" }
     steps
     {
     functional 'functional_test'
@@ -135,10 +135,11 @@ lib 'shlib'
             }
     }
         stage('Approval2'){
+        when{ branch "master" }
                 steps{
                 approval1 'APPROVAL1'
                 }
-                }*/
+                }
         stage('Deploy to Performance Server'){
         when { branch "master" }
              steps{
@@ -151,8 +152,9 @@ lib 'shlib'
                 }
             }
         }
-        /*stage('performance test')
+        stage('performance test')
        {
+       when{ branch "master" }
            steps
            {
            performance 'performance_test'
@@ -164,10 +166,11 @@ lib 'shlib'
             }
       }
         stage('Approval3'){
+        when{ branch "release" }
                 steps{
                 approval2 'APPROVAL1'
                 }
-                }*/
+                }
         stage('Deploy to Production Server'){
         when { branch "release" }
              steps{
