@@ -8,7 +8,7 @@ lib 'shlib'
         maven "Maven"
     }
     stages {
-      stage('Start')
+      /*stage('Start')
             {
                 steps
                  { 
@@ -173,14 +173,14 @@ lib 'shlib'
                     jira 'DEPLOYMENT TO PRODUCTION SERVER FAILED','TEST-15'
                 }
             }
-        }
+        }*/
 
       
         }
-        post{
+        /*post{
 always{
 sendNotifications currentBuild.result
 }
-}
+}*/
 
     }
