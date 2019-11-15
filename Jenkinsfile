@@ -263,10 +263,10 @@ lib 'shlib'
 
       
         }
-        /*post{
+        post{
 always{
 sendNotifications currentBuild.result
 }
-}*/
+}
 
     }
