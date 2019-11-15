@@ -146,7 +146,7 @@ lib 'shlib'
         stage("Deploy to Ansible Master for developer"){
         when{ branch "developer"}
          steps{
-            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_developer/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/playfile.yml'
+            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_developer/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/'
           }
 
 	post{
@@ -158,7 +158,7 @@ lib 'shlib'
          stage("Deploy to Ansible Master for master"){
         when{ branch "master"}
          steps{
-            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/master/performance.yml'
+            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/master'
           }
 
 	post{
@@ -170,7 +170,7 @@ lib 'shlib'
         stage("Deploy to Ansible Master for release"){
         when{ branch "release"}
          steps{
-            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/release/production.yml'
+            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/release'
           }
 	post{
                 failure{
