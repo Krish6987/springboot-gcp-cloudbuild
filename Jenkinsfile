@@ -25,7 +25,7 @@ lib 'shlib'
             }
             post{
                 failure{
-                    jira 'BUILD FAILED','TEST-1'
+                    jira 'BUILD FAILED','BUILD ABORTED DUE TO SOME ISSUE'
                 }
             }
             }
@@ -41,7 +41,7 @@ lib 'shlib'
             } 
             post{
                 failure{
-                    jira 'SONAR ANALYSIS FAILED','TEST-2'
+                    jira 'SONAR ANALYSIS FAILED','SONAR STEP FAILED'
                 }
             }
             }
@@ -51,7 +51,7 @@ lib 'shlib'
             }
             post{
                 failure{
-                    jira 'QUALITY GATE FAILED','TEST-3'
+                    jira 'QUALITY GATE FAILED','QUALITY GATE DIDNOT PASS'
                 }
             }
        }
@@ -62,7 +62,7 @@ lib 'shlib'
             }
             post{
                 failure{
-                    jira 'SECURITY SCAN FAILED','TEST-4'
+                    jira 'SECURITY SCAN FAILED','SECURITY SCAN DIDNOT PASS'
                 }
             }
        }*/
@@ -82,7 +82,7 @@ lib 'shlib'
          }
 	post{
                 failure{
-                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                    jira 'NEXUS UPLOADING FAILED','NEXUS ARTIFACT NOT UPLOADED'
                 }
             }
          }
@@ -95,7 +95,7 @@ lib 'shlib'
          }
 	post{
                 failure{
-                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                    jira 'NEXUS UPLOADING FAILED','NEXUS ARTIFACT NOT UPLOADED'
                 }
             }
          }
@@ -108,7 +108,7 @@ lib 'shlib'
          }
 	post{
                 failure{
-                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                    jira 'NEXUS UPLOADING FAILED','NEXUS ARTIFACT NOT UPLOADED'
                 }
             }
          }
@@ -121,7 +121,7 @@ lib 'shlib'
          }
 	post{
                 failure{
-                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                    jira 'NEXUS UPLOADING FAILED','NEXUS ARTIFACT NOT UPLOADED'
                 }
             }
          }
@@ -134,7 +134,7 @@ lib 'shlib'
             }
             post{
                 failure{
-                    jira 'DEPLOYMENT TO DEVELOPMENT SERVER FAILED','TEST-6'
+                    jira 'DEPLOYMENT TO DEVELOPMENT SERVER FAILED','WAR FILE DIDNOT DEPLOYED TO DEVELOPMENT SERVER'
                 }
             }
         }
@@ -151,7 +151,7 @@ lib 'shlib'
 
 	post{
                 failure{
-                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
+                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','NOT DEPLOYED TO ANSIBLE'
                 }
             }
          }
@@ -163,7 +163,7 @@ lib 'shlib'
 
 	post{
                 failure{
-                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
+                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','NOT DEPLOYED TO ANSIBLE'
                 }
             }
           }
@@ -174,7 +174,7 @@ lib 'shlib'
           }
 	post{
                 failure{
-                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
+                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','NOT DEPLOYED TO ANSIBLE'
                 }
             }
           }
@@ -194,7 +194,7 @@ lib 'shlib'
              }
              post{
                 failure{
-                    jira 'DEPLOYMENT TO TEST SERVER FAILED','TEST-9'
+                    jira 'DEPLOYMENT TO TEST SERVER FAILED','WAR FILE DIDNOT DEPLOYED TO TEST SERVER'
                 }
             }
         }
@@ -207,7 +207,7 @@ lib 'shlib'
     }
     post{
                 failure{
-                    jira 'FUNCTIONAL TEST FAILED','TEST-10'
+                    jira 'FUNCTIONAL TEST FAILED','PERFORMANCE TEST DIDNOT PASS'
                 }
             }
     }
@@ -225,7 +225,7 @@ lib 'shlib'
              }
              post{
                 failure{
-                    jira 'DEPLOYMENT TO PERFORMANCE SERVER FAILED','TEST-12'
+                    jira 'DEPLOYMENT TO PERFORMANCE SERVER FAILED','WAR FILE DIDNOT DEPLOYED TO PERFORMANCE SERVER'
                 }
             }
         }
@@ -238,7 +238,7 @@ lib 'shlib'
            }
            post{
                 failure{
-                    jira 'PERFORMANCE TEST FAILED','TEST-13'
+                    jira 'PERFORMANCE TEST FAILED','PERFORMANCE TEST DIDNOT PASS'
                 }
             }
       }
@@ -256,7 +256,7 @@ lib 'shlib'
              }
              post{
                 failure{
-                    jira 'DEPLOYMENT TO PRODUCTION SERVER FAILED','TEST-15'
+                    jira 'DEPLOYMENT TO PRODUCTION SERVER FAILED','WAR FILE DIDNOT DEPLOYED TO PRODUCTION SERVER'
                 }
             }
         }
