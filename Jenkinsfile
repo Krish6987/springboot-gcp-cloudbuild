@@ -67,33 +67,42 @@ lib 'shlib'
             }
        }*/
   
-            stage("Nexus") {
+            stage("Nexus Stage started") {
             steps {
           sendNotifications  'NEXUS STAGE STARTED'
           
         }
+        }
+        stage("Nexus upload of feature1"){
         when { branch "feature1" }
         steps{
           withCredentials([usernamePassword(credentialsId: 'nexus_creds', passwordVariable: 'password', usernameVariable:'username')]) {
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-feature-$BUILD_NUMBER.war'
          }
          }
+         }
+         stage("Nexus upload of  developer"){
          when { branch "developer" }
          steps{
           withCredentials([usernamePassword(credentialsId: 'nexus_creds', passwordVariable: 'password', usernameVariable:'username')]) {
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-developer-$BUILD_NUMBER.war'
          }
          }
+         }
+         stage("Nexus upload of  master"){
          when { branch "master" }
          steps{
           withCredentials([usernamePassword(credentialsId: 'nexus_creds', passwordVariable: 'password', usernameVariable:'username')]) {
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-master-$BUILD_NUMBER.war'
          }
          }
+         }
+         stage("Nexus upload of  release"){
          when { branch "release" }
          steps{
           withCredentials([usernamePassword(credentialsId: 'nexus_creds', passwordVariable: 'password', usernameVariable:'username')]) {
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-release-$BUILD_NUMBER.war'
+         }
          }
          }
         post{
@@ -118,17 +127,24 @@ lib 'shlib'
         steps{
            sendNotifications 'Deploy to Ansible Master'
         } 
+        }
+        stage("Deploy to Ansible Master for developer"){
         when{ branch "developer"}
          steps{
             sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_developer/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/playfile.yml'
           }
+         }
+         stage("Deploy to Ansible Master for master"){
         when{ branch "master"}
          steps{
-            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/performance.yml'
+            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/master/performance.yml'
           }
+          }
+        stage("Deploy to Ansible Master for release"){
         when{ branch "release"}
          steps{
-            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/production.yml'
+            sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/release/production.yml'
+          }
           }
             post{
                 failure{
