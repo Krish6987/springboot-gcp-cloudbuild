@@ -80,6 +80,11 @@ lib 'shlib'
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-feature-$BUILD_NUMBER.war'
          }
          }
+	post{
+                failure{
+                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                }
+            }
          }
          stage("Nexus upload of  developer"){
          when { branch "developer" }
@@ -88,6 +93,11 @@ lib 'shlib'
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-developer-$BUILD_NUMBER.war'
          }
          }
+	post{
+                failure{
+                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                }
+            }
          }
          stage("Nexus upload of  master"){
          when { branch "master" }
@@ -96,6 +106,11 @@ lib 'shlib'
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-master-$BUILD_NUMBER.war'
          }
          }
+	post{
+                failure{
+                    jira 'NEXUS UPLOADING FAILED','TEST-5'
+                }
+            }
          }
          stage("Nexus upload of  release"){
          when { branch "release" }
@@ -104,13 +119,13 @@ lib 'shlib'
               sh 'curl -u ${username}:${password} --upload-file target/springboot-0.0.1-SNAPSHOT.war http://ec2-18-224-155-110.us-east-2.compute.amazonaws.com:8081/nexus/content/repositories/devopstraining/hexagon6/springboot-0.0.1-SNAPSHOT-release-$BUILD_NUMBER.war'
          }
          }
-         }
-        post{
+	post{
                 failure{
                     jira 'NEXUS UPLOADING FAILED','TEST-5'
                 }
             }
-        }
+         }
+
          stage('Deploy to Development'){
             when { branch "feature1" }
             steps{
@@ -133,25 +148,36 @@ lib 'shlib'
          steps{
             sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_developer/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/playfile.yml'
           }
+
+	post{
+                failure{
+                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
+                }
+            }
          }
          stage("Deploy to Ansible Master for master"){
         when{ branch "master"}
          steps{
             sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_master/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/master/performance.yml'
           }
+
+	post{
+                failure{
+                    jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
+                }
+            }
           }
         stage("Deploy to Ansible Master for release"){
         when{ branch "release"}
          steps{
             sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/release/production.yml'
           }
-          }
-            post{
+	post{
                 failure{
                     jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
                 }
             }
-        }
+          }
         
         stage('Approval1'){
         when { branch "developer" }
