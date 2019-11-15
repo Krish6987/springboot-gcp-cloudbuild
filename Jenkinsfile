@@ -130,8 +130,6 @@ lib 'shlib'
          steps{
             sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -r /var/lib/jenkins/workspace/springboot-demo_release/target/springboot-0.0.1-SNAPSHOT.war ansadmin@172.31.31.91:/projects/developer/production.yml'
           }
-        }
-
             post{
                 failure{
                     jira 'DEPLOY TO ANSIBLE MASTER FAILED','TEST-7'
