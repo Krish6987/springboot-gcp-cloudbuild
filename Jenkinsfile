@@ -104,11 +104,11 @@ lib 'shlib'
             }
         }
         
-        stage('Approval1'){
+        /*stage('Approval1'){
                 steps{
                 approval 'APPROVAL'
                 }
-                }
+                }*/
                 
         stage('Deploy to Test Server'){
         when { branch "developer" }
@@ -122,7 +122,7 @@ lib 'shlib'
                 }
             }
         }
-          stage('functional test')
+          /*stage('functional test')
     {
     steps
     {
@@ -138,7 +138,7 @@ lib 'shlib'
                 steps{
                 approval1 'APPROVAL1'
                 }
-                }
+                }*/
         stage('Deploy to Performance Server'){
         when { branch "master" }
              steps{
@@ -151,7 +151,7 @@ lib 'shlib'
                 }
             }
         }
-        stage('performance test')
+        /*stage('performance test')
        {
            steps
            {
@@ -167,7 +167,7 @@ lib 'shlib'
                 steps{
                 approval2 'APPROVAL1'
                 }
-                }
+                }*/
         stage('Deploy to Production Server'){
         when { branch "release" }
              steps{
