@@ -8,7 +8,7 @@ lib 'shlib'
         maven "Maven"
     }
     stages {
-      /*stage('Start')
+      stage('Start')
             {
                 steps
                  { 
@@ -55,7 +55,7 @@ lib 'shlib'
                 }
             }
        }
-       stage('Security scan') {
+       /*stage('Security scan') {
             steps {
             sendNotifications 'security scan started'
              scan 'SCAN'
@@ -65,7 +65,7 @@ lib 'shlib'
                     jira 'SECURITY SCAN FAILED','TEST-4'
                 }
             }
-       }
+       }*/
   
             stage("Nexus") {
             steps {
@@ -79,6 +79,7 @@ lib 'shlib'
             }
         }
          stage('Deploy to Development'){
+            when { branch "feature1" }
             steps{
             devenvironment 'DEPLOY INTO DEV ENVIROINMENT'
              deploy_development 'deploy_dev'
@@ -108,6 +109,7 @@ lib 'shlib'
                 }
                 
         stage('Deploy to Test Server'){
+        when { branch "developer" }
              steps{
                  sendNotifications 'Deploy to Test Server'
                  deploy_test 'deploy_test'
@@ -136,6 +138,7 @@ lib 'shlib'
                 }
                 }
         stage('Deploy to Performance Server'){
+        when { branch "master" }
              steps{
              sendNotifications 'Deploy to Performance Server'
                  deploy_performance 'deploy_per'
@@ -164,6 +167,7 @@ lib 'shlib'
                 }
                 }
         stage('Deploy to Production Server'){
+        when { branch "release" }
              steps{
              sendNotifications 'Deploy to Production Server'
                  deploy_production  'deploy_prod'
@@ -173,7 +177,7 @@ lib 'shlib'
                     jira 'DEPLOYMENT TO PRODUCTION SERVER FAILED','TEST-15'
                 }
             }
-        }*/
+        }
 
       
         }
