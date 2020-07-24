@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Page</title>
 <style>
 body {font-family: Arial, Helvetica, sans-serif; background-color: black}
 
@@ -129,7 +130,7 @@ span.psw {
 <body>
 <div align="center" style="padding-top: 10%">
 <h2 style="color: white">Click the button to Login</h2>
-<font color="red">${errorMessage}</font>
+<font color="red">${errorMessage}<br></font>
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 </div>
 
