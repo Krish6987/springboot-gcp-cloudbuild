@@ -6,5 +6,7 @@ WORKDIR /usr/src/app/springboot/
 
 COPY . .
 
+RUN ls
+
 RUN mvn clean install
 
