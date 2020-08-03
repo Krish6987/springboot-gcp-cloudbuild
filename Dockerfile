@@ -1,1 +1,1 @@
-FROM gcr.io/cloud-builders/mvn:latest
+FROM gcr.io/cloud-builders/mvn@sha256:b58f556bc79e9a1ddb3bb1606c991926db080dd3c37e49477ad116c9852e2a60
