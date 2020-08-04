@@ -18,3 +18,4 @@ COPY --from=builder /usr/src/app/springboot/target/springboot-0.0.1-SNAPSHOT.war
 
 CMD ["catalina.sh","run"]
 
+EXPOSE 8080
