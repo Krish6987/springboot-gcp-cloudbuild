@@ -6,8 +6,6 @@ WORKDIR /usr/src/app/springboot/
 
 COPY . .
 
-RUN ls
-
 RUN mvn clean install
 
 FROM tomcat:8.0.51-jre8-alpine
