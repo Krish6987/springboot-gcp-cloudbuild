@@ -18,8 +18,8 @@ steps:
    - run
    - --filename=springdeployment.yaml
    - --location=us-central1-c
-   - --cluster=cloudbuild
+   - --cluster=cloudbuildgke
    
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   args: ['app', 'deploy']
-#   timeout: '1600s'
+ - name: 'gcr.io/cloud-builders/gcloud'
+   args: ['app', 'deploy']
+   timeout: '1600s'
