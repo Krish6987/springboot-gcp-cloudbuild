@@ -17,6 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.Test.myWebApp_Test.ApplicationTestSpring</start-class>
 	</properties>
 
 <dependencies>
@@ -70,7 +71,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-       			 <mainClass>com.wipro.autoui.SpringBootAutoService.SpringBootAutoProvisionUI</mainClass> 
+       			 <mainClass>com.Test.myWebApp_Test.ApplicationTestSpring</mainClass> 
    				 </configuration>
 				<executions>
 					<execution>
