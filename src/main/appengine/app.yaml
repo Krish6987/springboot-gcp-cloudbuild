@@ -1,4 +1,4 @@
-runtime: java
+runtime: ustom
 env: flex
 
 handlers:
