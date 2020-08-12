@@ -25,10 +25,11 @@ kind: Service
 metadata:
   name: springservice
 spec:
+  loadBalancerIP: 35.184.57.24
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 8080
   selector:
     app: springapp
@@ -43,4 +44,4 @@ metadata:
 spec:
   backend:
     serviceName: springservice
-    servicePort: 8080
+    servicePort: 80
