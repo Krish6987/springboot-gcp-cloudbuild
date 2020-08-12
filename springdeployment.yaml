@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: springboot
-        image: gcr.io/eternal-ship-281907/springapp:latest
+        image: gcr.io/eternal-ship-281907/springapp:latest	
         ports:
         - containerPort: 8080
         
@@ -28,7 +28,19 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 8080
   selector:
     app: springapp
+    
+    
+---
+
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: spring-ingress
+spec:
+  backend:
+    serviceName: springservice
+    servicePort: 8080
