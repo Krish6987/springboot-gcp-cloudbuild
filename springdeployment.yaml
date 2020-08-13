@@ -16,7 +16,10 @@ spec:
       - name: springboot
         image: gcr.io/eternal-ship-281907/springapp:latest
         ports:
-        - containerPort: 8080
+        - containerPort: $(containerPort)
+        env:
+        - name: containerPort
+          value: 8080
         
 ---
 
