@@ -14,12 +14,26 @@ spec:
     spec:
       containers:
       - name: springboot
-        image: gcr.io/eternal-ship-281907/springapp:latest
+        image: gcr.io/eternal-ship-281907/springapp
         ports:
-        - containerPort: $(containerPort)
-        env:
-        - name: containerPort
-          value: 8080
+        - containerPort: 8080
+        ...
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 2
+          periodSeconds: 3
+          failureThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 20
+          timeoutSeconds: 2
+          periodSeconds: 8
+          failureThreshold: 1
         
 ---
 
@@ -37,27 +51,4 @@ spec:
   selector:
     app: springapp
     
-    
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    test: liveness
-  name: liveness-exec
-spec:
-  containers:
-  - name: liveness
-    image: k8s.gcr.io/busybox
-    args:
-    - /bin/sh
-    - -c
-    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
-    livenessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
+   
