@@ -17,22 +17,6 @@ spec:
         image: gcr.io/eternal-ship-281907/springapp
         ports:
         - containerPort: 8080
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 10
-          timeoutSeconds: 2
-          periodSeconds: 3
-          failureThreshold: 1
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 20
-          timeoutSeconds: 2
-          periodSeconds: 8
-          failureThreshold: 1
         
 ---
 
