@@ -25,7 +25,6 @@ kind: Service
 metadata:
   name: springservice
 spec:
-  loadBalancerIP: 35.184.57.24
   type: LoadBalancer
   ports:
     - protocol: TCP
