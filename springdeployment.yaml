@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
-            path: /
+            path: /health
             port: 8080
           initialDelaySeconds: 10
           timeoutSeconds: 2
@@ -28,7 +28,7 @@ spec:
           failureThreshold: 1
         livenessProbe:
           httpGet:
-            path: /
+            path: /health
             port: 8080
           initialDelaySeconds: 20
           timeoutSeconds: 2
@@ -46,7 +46,7 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 8080
   selector:
     app: springapp
