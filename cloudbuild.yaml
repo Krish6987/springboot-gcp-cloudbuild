@@ -11,10 +11,15 @@ steps:
    args: ["build", "-t", "gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA", "--build-arg=WAR_FILE=target/springboot-0.0.1-SNAPSHOT.war", "."]
    
  - name: 'gcr.io/cloud-builders/docker'
+   args: ['tag', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:latest']  
+   
+ - name: 'gcr.io/cloud-builders/docker'
    args: ['push', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA']
    
  - name: 'gcr.io/cloud-builders/docker'
-   args: ['tag', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:latest']
+   args: ['push', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:latest']
+   
+ 
 
  - name: "gcr.io/cloud-builders/gke-deploy"
    args:
