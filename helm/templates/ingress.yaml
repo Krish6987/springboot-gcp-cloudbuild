@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
 spec:
-  backend:
-    serviceName: {{ .Values.service.name }}
-    servicePort: {{ .Values.service.port }}
+  rules:
+  - host: toolautomation.com
+    http:
+      paths:
+      - path: /
+        backend:
+	      serviceName: {{ .Values.service.name }}
+	      servicePort: {{ .Values.service.port }}
