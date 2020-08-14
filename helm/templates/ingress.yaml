@@ -2,12 +2,13 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
-spec:
+  
+spec: 
   rules:
-  - host: toolautomation.com
+  - host: hidden-recipe.xyz
     http:
       paths:
       - path: /
         backend:
-	      serviceName: {{ .Values.service.name }}
-	      servicePort: {{ .Values.service.port }}
+          serviceName: {{ .Values.service.name }}
+          servicePort: {{ .Values.service.port }}
