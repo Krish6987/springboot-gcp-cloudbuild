@@ -7,14 +7,14 @@ image:
   pullPolicy: Always
   
 service:
-  name: spring-service
+  name: springservice
   type: LoadBalancer
   port: 80
   targetPort: 8080
   
 deployment:
-  name: spring-deploy
-  app: spring-app
+  name: springdeploy
+  app: springapp
   
 ingress:
   name: spring-ingress
