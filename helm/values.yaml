@@ -7,17 +7,17 @@ image:
   pullPolicy: Always
   
 service:
-  name: springservice
+  name: spring-service
   type: ClusterIP
   port: 80
   targetPort: 8080
   
 deployment:
-  name: springdeploy
-  app: springapp
+  name: spring-deploy
+  app: spring-app
   
 ingress:
-  name: springingress
+  name: spring-ingress
   # Used to create an Ingress record.
   hosts:
     - chart-example.local
