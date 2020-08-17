@@ -5,10 +5,10 @@ metadata:
   
 spec: 
   rules:
-  - host: hidden-recipe.xyz
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /
+      - path: {{ .Values.ingress.paths.path }}
         backend:
           serviceName: {{ .Values.service.name }}
           servicePort: {{ .Values.service.port }}

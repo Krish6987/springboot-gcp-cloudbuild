@@ -18,6 +18,9 @@ deployment:
   
 ingress:
   name: spring-ingress
+  host: hidden-recipe.xyz
+  paths:
+    path: /
   # Used to create an Ingress record.
   hosts:
     - chart-example.local
