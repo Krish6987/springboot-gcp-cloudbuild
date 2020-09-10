@@ -15,7 +15,6 @@ spec:
       containers:
       - name: springboot
         image: gcr.io/eternal-ship-281907/springapp:latest
-        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           
