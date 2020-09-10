@@ -26,4 +26,4 @@ steps:
    - run
    - --filename=springdeployment.yaml
    - --location=us-central1-c
-   - --cluster=cloudbuildgke
+   - --cluster=terraform-gke-cluster
