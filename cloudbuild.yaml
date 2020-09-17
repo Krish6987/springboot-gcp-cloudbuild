@@ -26,4 +26,5 @@ steps:
    - run
    - --filename=springdeployment.yaml
    - --location=us-central1
+   - --image=gcr.io/eternal-ship-281907/springapp:latest
    - --cluster=terraform-gke-cluster
